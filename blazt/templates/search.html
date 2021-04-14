@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+  {% block cont %}
+  
+  <br>
+  <h1 class="data"> Results </h1>
+  
+  {% if results|length == 0 %}
+    <h1 style="color:red" class="data"> No songs found</h1>
+  {% else %}
+    {% for song in results %}
+    <div class="container" onclick="document.getElementById('title').value = '{{ song.name }}' ; submit('mainform');">
+      
+      <img id="spic" src="{{ song.spic }}">
+      
+       <h1>{{ song.name }}</h1>
+       <h2 style="color:gray;">{{ song.desc }} </h2>
+  
+     </div>
+     {% endfor %}
+   {% endif %}
+  
+  {% endblock %}

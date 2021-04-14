@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block cont %}
+  <style>
+    #downloadbtn2{
+      width : 10%;
+      float : right ;
+      margin-top : -175px;
+      margin-right : 90px;
+    }
+    
+    #searchbox{
+      background : white;
+    }
+    
+    #searchbar{
+       width : 80%;
+       height : 80%;
+       margin-left : 30px;
+       margin-right : 50px;
+       font-size : 40px;
+       border-radius : 70px;
+       background : #f0f0f0;
+       padding-left : 50px;
+       border : none;
+       outline : none;
+       font-family : verdana;
+    }
+    
+    #searchbtn{
+      margin-top : -100px;
+      margin-right : 30px;
+      float: right;
+      width : 10%;
+    }
+  </style>
+
+
+
+
+  <!-- search -->
+  <div id="searchbox" class="container">
+    <form method="GET" action="/search/">
+      <input minlength="3" name="inpname" type="text" id="searchbar" placeholder="search" required>
+      <input type="image" id="searchbtn" class="icons" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYqjrOH25ChZa10hLgtmZUN4xOVUcPN9DlBw&usqp=CAU">
+    </form>
+  </div>
+  
+  
+  <br>
+  <h1 class="data"> Top songs </h1>
+  
+  {% for song in objs %} 
+  
+  <form id="mainform" method="POST" action="/player/">{% csrf_token %}
+     <input id="title" type="hidden" name="title" >
+  </form>
+ 
+  <div class="container" onclick="document.getElementById('title').value = '{{ song.name }}' ; submit('mainform');">
+    
+    <img id="spic" src="{{ song.spic }}">
+    
+     <h1>{{ song.name }}</h1>
+     <h2 style="color:gray;">{{ song.desc }} </h2>
+
+   </div>
+   
+   <a id="downloadlink" href="" download>
+        <img class="icons" id="downloadbtn2" onclick="alert('Downloading ..');"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW6EeTepQUTPHt7lSMl8hdZWf0Ye4UgVoQQw&usqp=CAU">
+      </a>
+  
+    
+  
+  
+  {% endfor %}
+
+
+  
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block cont %}
+  <style>
+    #link{
+      text-decoration : none;
+    }
+    
+    #line{
+      margin-top : 100px;
+    }
+    
+    #curspic{
+      width : 60%;
+      height : auto;
+      border-radius : 20px;
+      margin-top : 100px;
+      margin-right : 200px;
+      margin-left : 200px;
+      margin-bottom : 50px;
+    }
+    
+    #likebtn{
+      margin-left : 150px;
+      margin-right : 50px;
+    }
+    
+    #mainbtn{
+      margin-left : 25px;
+      margin-right : 25px;
+    }
+    
+    #downloadbtn{
+      margin-left : 50px;
+      margin-right : 140px ;
+    }
+  </style>
+   
+   <a href="/" id="link">
+     <h1 id="line" class="data"> Back to home </h1>
+   </a>
+  
+   {% for cur in current %}
+    <img id="curspic" src="{{ cur.spic }}">
+    
+     <h1 align="center">{{ cur.name }}<h1>
+     <h2 align="center" style="color:gray">{{ cur.desc }} - {{ cur.name }}</h2>
+     
+     <script>
+       var audio = new Audio("{{ cur.link }}")
+       document.getElementById('downloadlink').href = audio;
+       
+       audio.addEventListener("ended",function (){
+         pause();
+         alert("done playing");
+       },false)
+     </script>
+     
+    {% endfor %}
+    <br><hr>
+    
+    <div class="container" style="background:white">
+      
+      <img class="icons" id="likebtn" onclick="handlelike()" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8e5U70HbGk_dkR6UZbUMfLelRACCFQ2T2tQ&usqp=CAU">
+
+      <img class="icons" id="mainbtn" onclick="handle()" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJY3b_Mz9rg0mfSPivPD70N7TuDq8g4YG6sw&usqp=CAU">
+      
+      
+      <a id="downloadlink" href="" download>
+        <img class="icons" id="downloadbtn" onclick="alert('Downloading ..');" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW6EeTepQUTPHt7lSMl8hdZWf0Ye4UgVoQQw&usqp=CAU">
+      </a>
+      
+    </div>
+    
+    
+    <h1 class="data">Suggested songs </h1><br>
+    
+     {% for song in queue %}
+     
+    <div class="container" onclick="document.getElementById('title').value = '{{ song.name }}' ; submit('mainform');">
+    
+      <img id="spic" align="left" src="{{ song.spic }}">
+    
+       <h1>{{ song.name }}</h1>
+       <h2 style="color:gray;">{{ song.desc }}</h2>
+    
+     </div>
+
+  
+    
+    {% endfor %}
+    
+{% endblock %}

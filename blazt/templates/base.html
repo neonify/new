@@ -1,0 +1,123 @@
+<DOCTYPE html>
+  
+<!---#0066ff  #6699ff-->
+
+<html>
+	<head>
+		<title>blazt</title>
+		<style>
+		      #wrap{
+		        width : 960px;
+		        margin :0 auto;
+		      }
+          .icons{
+            width : 14%;
+            height : auto;
+            border-radius : 100%;
+            float : left;
+            margin-top : 20px;
+          }
+    
+          #spic{
+            width : 17%;
+            height : 90%;
+            border-radius : 10px ;
+            margin-right : 60px;
+            float : left;
+          }
+  
+		    .container{
+		      background : #f0f0f0;
+          border-radius : 10px;
+          height : 8%;
+          margin-top : 30px;
+          margin-right : 50px;
+          margin-left : 50px;
+          margin-bottom : 30px;
+          padding-left : 30px;
+          padding-top  : 20px;
+          padding-bottom: 18px;
+          padding-right : -10px;
+          font-family: Fantasy;
+		    }
+		    
+		    hr{
+		      width : 80%;
+		      height : 2px;
+		    }
+		    
+		    .data{
+		      font-family: verdana;
+		      color : #0066ff;
+		      margin-left : 80px;
+		      height : 40px;
+		    }
+		    
+		</style>
+	</head>
+	<body>
+	  
+	  <div id="wrap">
+		  {% block cont %}
+		  {% endblock %}	    
+	  </div>
+
+		
+		<form id="mainform" method="POST" action="/player/">{% csrf_token %}
+       <input id="title" type="hidden" name="title" >
+    </form>
+    
+    
+    
+		<script>
+		
+		
+		var list = []
+		
+		var mainicon = document.getElementById("mainbtn");
+		var likeicon = document.getElementById("likebtn");
+
+		let status = "paused";
+		let liked = false
+    
+    function pause(){
+      status = "paused"
+      mainicon.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJY3b_Mz9rg0mfSPivPD70N7TuDq8g4YG6sw&usqp=CAU"
+      audio.pause()
+    }
+    
+    function handle(){
+      if (status == "playing"){
+        pause()
+        
+      }else{
+        status = "playing"
+        mainicon.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYmg6vXJMt2JdZ-yvj-ATawNEuigBRxJK9wA&usqp=CAU"
+        audio.play()
+        
+      }
+      
+    }
+    
+    function handlelike(){
+      if (liked == true){
+        liked = false
+        likeicon.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8e5U70HbGk_dkR6UZbUMfLelRACCFQ2T2tQ&usqp=CAU"
+      }else{
+        liked = true
+        likeicon.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjF7jwbzlQSXYM6i3yIKpxffNj9eYPJhDhxQ&usqp=CAU"
+      }
+    }
+  
+     function submit(formname){
+        document.getElementById(formname).submit();
+      }
+     
+     
+     
+   
+  </script>
+   
+	</body>
+</html>
+
